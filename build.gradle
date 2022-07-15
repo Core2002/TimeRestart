@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+group 'fun.fifu'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+
+    //国内镜像源
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://mirrors.huaweicloud.com/repository/maven' }
+    //Minecraft
+    maven { url 'https://crystal.lss233.com.aslf.top/repositories/minecraft' }
+    maven { url 'https://lss233.com/artifactory/minecraft' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.alkaidmc.alkaid:alkaid-bukkit:1.0.0-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    manifest {
+        attributes(
+                'Main-Class': 'fun.fifu.timerestart.Main',
+                "Multi-Release": true
+        )
+    }
+}
+
+tasks.withType(JavaCompile) {  
+    options.encoding = "UTF-8"  
+}

@@ -1,0 +1,5 @@
+main: fun.fifu.timerestart.TimeRestart
+version: 1.0
+name: TimeRestart
+author: NekokeCore
+api-version: 1.16
