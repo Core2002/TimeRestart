@@ -35,16 +35,16 @@ public class TimeRestart extends JavaPlugin implements Listener {
 
         new AlkaidCommand(plugin).simple()
                 .command("timerestart")
-                .description("当服务器人数<=某值时重启")
-                .permission("timerestart.permission")
-                .usage("/timerestart <人数>  当服务器人数<=某值时重启")
+                .description("当在线人数<=某值时重启")
+                .permission("timerestart.use")
+                .usage("/timerestart <人数>  当在线人数<=某值时重启")
                 .aliases(List.of("ts"))
                 .executor((sender, command, label, args) -> {
                     playerNum = getServer().getOnlinePlayers().size();
                     if (args.length == 1)
                         restartNum = Integer.parseInt(args[0]);
                     if (restartNum >= 0)
-                        sender.sendMessage("服务器将在玩家人数<=" + restartNum + "时重启");
+                        sender.sendMessage("在线人数<= " + restartNum + " 时重启");
                     else
                         sender.sendMessage("重启关闭");
                     checkShutdown();
@@ -57,7 +57,7 @@ public class TimeRestart extends JavaPlugin implements Listener {
 
     private void checkShutdown() {
         if (restartNum >= 0 && playerNum <= restartNum) {
-            getServer().getLogger().info("玩家人数<=" + restartNum + "，重启");
+            getServer().getLogger().info("在线人数<= " + restartNum + " ，重启");
             getServer().shutdown();
         }
     }
